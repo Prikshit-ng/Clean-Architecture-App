@@ -3,11 +3,13 @@ package com.prikshit.delivery.ui.deliveryDetail
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.prikshit.delivery.R
+import com.prikshit.delivery.databinding.ActivityDeliveryDetailBinding
 import com.prikshit.delivery.ui.deliveryDetail.viewmodel.DeliveryDetailViewmodel
 import com.prikshit.delivery.ui.factory.ViewModelFactory
 import com.prikshit.domain.entities.DeliveryEntity
@@ -16,19 +18,25 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_delivery_detail.*
 import javax.inject.Inject
 
+
 class DeliveryDetailActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private lateinit var deliveryDetailVM: DeliveryDetailViewmodel
+    lateinit var deliveryDetailVM: DeliveryDetailViewmodel
 
     private var disposables = CompositeDisposable()
+
+    lateinit var binding: ActivityDeliveryDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_delivery_detail)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_delivery_detail)
+        binding.lifecycleOwner = this
+        var handlers = ClickHandler()
+        binding.handlers = handlers
         init()
     }
 
@@ -48,49 +56,21 @@ class DeliveryDetailActivity : AppCompatActivity() {
 
     private fun updateUI() {
         val deliveryDetail = deliveryDetailVM.detDeliveryById(intent.getStringExtra("dId") ?: "")
-        deliveryDetail.observe(this,
-            Observer {
+        binding.delivery = deliveryDetail
+        var dnldImg = true
+        deliveryDetail.observe(this, Observer {
+            if (dnldImg)
                 setUiData(it)
-                favButton.setOnClickListener { _ ->
-                    val deliveryData = it
-                    deliveryData.isFav = !it.isFav
-                    disposables.add(
-                        deliveryDetailVM.updateDelivery(deliveryData)
-                            .subscribe({
-
-                                deliveryDetail.removeObservers(this)
-                                updateUI()
-                            },
-                                { e ->
-                                    e.printStackTrace()
-                                })
-                    )
-                }
-            })
+            dnldImg = false
+        })
     }
 
     private fun setUiData(it: DeliveryEntity) {
-        fromTV.text = it.routeEntity.start
-        toTV.text = it.routeEntity.end
-        remarksTV.text = it.remarks
         Glide.with(this)
             .load(it.goodsPicture)
             .error(getDrawable(R.drawable.ic_photo_black_24dp))
             .apply(RequestOptions().override(100, 100))
             .into(goodsIV)
-        sendersName.text = it.senderEntity.name
-        sendersPhone.text = it.senderEntity.phone
-        sendersEmail.text = it.senderEntity.email
-        deliveryFeeTV.text = it.deliveryFee
-        surchargeFeeTV.text = it.surcharge
-        totalFeeTV.text = it.getTotalAmount()
-        if (it.isFav) {
-            favButton.setText(R.string.remove_from_favourite)
-            favButton.setIconResource(R.drawable.ic_favorite_fill)
-        } else {
-            favButton.setText(R.string.add_to_favourite)
-            favButton.setIconResource(R.drawable.ic_favorite)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -101,5 +81,17 @@ class DeliveryDetailActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         disposables.dispose()
+    }
+
+    inner class ClickHandler {
+
+        fun onFavBtnClick(deliveryData: DeliveryEntity) {
+            deliveryData.isFav = !deliveryData.isFav
+            disposables.add(
+                deliveryDetailVM.updateDelivery(deliveryData)
+                    .subscribe({ },
+                        { e -> e.printStackTrace() })
+            )
+        }
     }
 }

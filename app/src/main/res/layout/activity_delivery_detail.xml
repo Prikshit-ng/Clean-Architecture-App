@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="androidx.lifecycle.LiveData"/>
+        <variable
+            name="delivery"
+            type="LiveData&lt;com.prikshit.domain.entities.DeliveryEntity>"/>
+        <variable
+            name="handlers"
+            type="com.prikshit.delivery.ui.deliveryDetail.DeliveryDetailActivity.ClickHandler" />
+    </data>
+<ScrollView
     android:background="@color/grey"
-    android:fillViewport="true">
-
-
+    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/na"
+                    android:text="@{delivery.routeEntity.start}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="@+id/textView2"
@@ -87,7 +95,7 @@
                     android:id="@+id/toTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/na"
+                    android:text="@{delivery.routeEntity.end}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="@+id/textView"
@@ -144,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginLeftRightCard"
                     android:layout_marginEnd="@dimen/cardPadding"
-                    android:text=""
+                    android:text="@{delivery.remarks}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeMedium"
                     app:layout_constraintBottom_toBottomOf="@+id/goodsIV"
@@ -204,7 +212,7 @@
                     android:layout_marginStart="@dimen/marginLeftRightCard"
                     android:layout_marginTop="@dimen/cardPadding"
                     android:layout_marginBottom="@dimen/cardPadding"
-                    android:text="@string/na"
+                    android:text="@{delivery.senderEntity.name}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -232,7 +240,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginLeftRightCard"
-                    android:text="@string/na"
+                    android:text="@{delivery.senderEntity.email}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="@+id/textView4"
@@ -261,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginLeftRightCard"
-                    android:text="@string/na"
+                    android:text="@{delivery.senderEntity.phone}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="@+id/textView5"
@@ -316,7 +324,7 @@
                     android:id="@+id/deliveryFeeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/na"
+                    android:text="@{delivery.deliveryFee}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="@+id/feeTV"
@@ -342,7 +350,7 @@
                     android:id="@+id/surchargeFeeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/na"
+                    android:text="@{delivery.surcharge}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="@+id/surchargeTV"
@@ -372,7 +380,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginLeftRightCard"
-                    android:text="@string/na"
+                    android:text="@{delivery.totalAmount}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textSizeNormal"
                     app:layout_constraintBottom_toBottomOf="@+id/chargeTV"
@@ -385,6 +393,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/favButton"
+            android:onClick="@{(v) -> handlers.onFavBtnClick(delivery)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -393,12 +402,12 @@
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/colorAccent"
             android:padding="@dimen/marginTopBottomCard"
-            android:text="@string/add_to_favourite"
+            android:text="@{delivery.fav ? @string/remove_from_favourite : @string/add_to_favourite}"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/text_20"
             app:cornerRadius="8dp"
-            app:icon="@drawable/ic_favorite"
+            app:icon="@{delivery.fav ? @drawable/ic_favorite_fill : @drawable/ic_favorite}"
             app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -409,3 +418,4 @@
             android:layout_height="80dp" />
     </LinearLayout>
 </ScrollView>
+</layout>

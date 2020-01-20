@@ -33,26 +33,6 @@ class RemoteDataSourceImplTest {
     }
 
     @Test
-    fun testGetDeliveries() {
-        val deliveries = TestDataGenerator.generateDeliveryList()
-        Mockito.`when`(deliveryService.getDeliveries(0, 20))
-            .thenReturn(Observable.just(deliveries))
-
-        remoteDataSource.getDeliveries("0", 20)
-            .test()
-            .assertSubscribed()
-            .assertValue { list ->
-                list.containsAll(
-                    deliveries.map { deliveryNetworkMapper.from(it) }
-                )
-            }
-            .assertComplete()
-
-        Mockito.verify(deliveryService, Mockito.times(1))
-            .getDeliveries(0, 20)
-    }
-
-    @Test
     fun testGetDeliveriesError() {
         val errorMsg = "ERROR"
         val limit = 20
