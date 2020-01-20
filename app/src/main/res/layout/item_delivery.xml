@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginLeft="@dimen/marginLeftRightCard"
-    android:layout_marginRight="@dimen/marginLeftRightCard"
-    android:layout_marginTop="@dimen/marginTopBottomCard"
-    android:layout_marginBottom="@dimen/marginTopBottomCard"
-    app:cardCornerRadius="@dimen/cardCornerRadius"
-    android:paddingEnd="@dimen/marginLeftRightCard"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
-
+<data>
+    <variable
+        name="delivery"
+        type="com.prikshit.domain.entities.DeliveryEntity"/>
+</data>
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="@dimen/marginLeftRightCard"
+        android:layout_marginRight="@dimen/marginLeftRightCard"
+        android:layout_marginTop="@dimen/marginTopBottomCard"
+        android:layout_marginBottom="@dimen/marginTopBottomCard"
+        app:cardCornerRadius="@dimen/cardCornerRadius"
+        android:paddingEnd="@dimen/marginLeftRightCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -59,6 +64,7 @@
             android:layout_marginStart="@dimen/marginLeftRightCard"
             android:textColor="@color/black"
             android:textSize="@dimen/textSizeNormal"
+            android:text="@{delivery.routeEntity.start}"
             app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="@+id/textView2"
@@ -70,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:text="@{delivery.routeEntity.end}"
             android:textSize="@dimen/textSizeNormal"
             android:layout_marginStart="@dimen/marginLeftRightCard"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
@@ -84,12 +91,13 @@
             android:layout_marginEnd="18dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_favorite_fill"
+            android:src="@{delivery.fav ? @drawable/ic_favorite_fill : @drawable/ic_favorite}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/amountTV"
+            android:text="@{delivery.totalAmount}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -101,4 +109,5 @@
             app:layout_constraintVertical_bias="0.187"
             tools:ignore="SpUsage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>

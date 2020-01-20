@@ -53,6 +53,4 @@ class RemoteModule {
             .baseUrl(Constants.API_URL)
             .build()
     }
-
-
 }

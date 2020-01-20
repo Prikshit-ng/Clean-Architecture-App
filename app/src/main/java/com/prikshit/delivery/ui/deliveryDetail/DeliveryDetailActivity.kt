@@ -28,14 +28,14 @@ class DeliveryDetailActivity : AppCompatActivity() {
 
     private var disposables = CompositeDisposable()
 
-    lateinit var binding: ActivityDeliveryDetailBinding
+    private lateinit var binding: ActivityDeliveryDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_delivery_detail)
         binding.lifecycleOwner = this
-        var handlers = ClickHandler()
+        val handlers = ClickHandler()
         binding.handlers = handlers
         init()
     }

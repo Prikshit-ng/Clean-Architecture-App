@@ -3,7 +3,6 @@ package com.prikshit.delivery.ui.deliveries.paging
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
-import com.prikshit.delivery.BuildConfig
 import com.prikshit.delivery.utils.Constants
 import com.prikshit.delivery.utils.NetworkUtil
 import com.prikshit.domain.entities.DeliveryEntity

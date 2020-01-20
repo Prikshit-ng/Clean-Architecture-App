@@ -75,7 +75,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryAdapter.DeliveryClickL
                     if (deliveryListAdapter.itemCount < 1) {
                         retryBtn.visibility = View.VISIBLE
                     }
-                    deliveryListAdapter.setLoading(false)
+                    deliveryListAdapter.showLoading(false)
                     val err = getString(
                         if (it == Status.NETWORK_ERROR) R.string.network_error
                         else R.string.error_message
@@ -86,7 +86,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryAdapter.DeliveryClickL
                 }
                 Status.PAGE_LOADING -> {
                     hideRefresher()
-                    deliveryListAdapter.setLoading(true)
+                    deliveryListAdapter.showLoading(true)
                 }
                 Status.LOADED -> {
                     hideRefresher()
@@ -96,7 +96,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryAdapter.DeliveryClickL
                 else -> {
                     hideRefresher()
                     retryBtn.visibility = View.GONE
-                    deliveryListAdapter.setLoading(loading = false)
+                    deliveryListAdapter.showLoading(showLoader = false)
                 }
             }
         })

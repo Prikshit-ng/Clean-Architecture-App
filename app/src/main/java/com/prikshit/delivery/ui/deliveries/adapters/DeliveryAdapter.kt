@@ -1,22 +1,22 @@
 package com.prikshit.delivery.ui.deliveries.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_delivery.view.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.prikshit.delivery.R
+import com.prikshit.delivery.databinding.ItemDeliveryBinding
+import com.prikshit.delivery.databinding.ItemLoaderBinding
 import com.prikshit.domain.entities.DeliveryEntity
+import kotlinx.android.synthetic.main.item_delivery.view.*
 import kotlinx.android.synthetic.main.item_end.view.*
 import kotlinx.android.synthetic.main.item_loader.view.*
-import java.lang.Exception
 
 const val VIEW_TYPE_ITEM = 0
 const val VIEW_TYPE_LOADING = 1
@@ -40,7 +40,7 @@ class DeliveryAdapter(private val listener: DeliveryClickListener) :
     }
 
     override fun getItemCount(): Int {
-        return super.getItemCount() + if (hasLoadingFooter()) 1 else 0
+        return super.getItemCount() + if (hasFooter()) 1 else 0
     }
 
     companion object {
@@ -59,98 +59,81 @@ class DeliveryAdapter(private val listener: DeliveryClickListener) :
                 ): Boolean {
                     return oldItem == newItem
                 }
-
             }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_ITEM -> return DeliveryVH(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_delivery, parent, false)
+                DataBindingUtil.inflate(
+                    LayoutInflater.from(parent.context),
+                    R.layout.item_delivery, parent, false
+                )
             )
             VIEW_TYPE_END -> return EndVH(
                 LayoutInflater.from(parent.context).inflate(R.layout.item_end, parent, false)
             )
             else -> LoadingVH(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_loader, parent, false)
+                DataBindingUtil.inflate(
+                    LayoutInflater.from(parent.context),
+                    R.layout.item_loader, parent, false
+                )
             )
         }
     }
 
     override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
-        position: Int
+        holder: RecyclerView.ViewHolder, position: Int
     ) {
         when {
             getItemViewType(position) == VIEW_TYPE_END -> (holder as EndVH).bind()
-            getItemViewType(position) == VIEW_TYPE_LOADING -> (holder as LoadingVH).bind(showLoader, retryObservable)
-            else -> try{
+            getItemViewType(position) == VIEW_TYPE_LOADING -> (holder as LoadingVH).bind(
+                showLoader,
+                retryObservable
+            )
+            else -> try {
                 (holder as DeliveryVH).bind(getItem(position) as DeliveryEntity)
-            }catch (e:Exception){
+            } catch (e: Exception) {
 
             }
         }
     }
 
-    inner class EndVH(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun bind(){
+    inner class EndVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind() {
             itemView.endChip.visibility = View.VISIBLE
             itemView.endTV.visibility = View.VISIBLE
             itemView.endChip.setOnClickListener {
                 itemView.endChip.visibility = View.GONE
                 itemView.endTV.visibility = View.GONE
-
             }
         }
     }
 
-    inner class LoadingVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(isLoading: Boolean, retry:Boolean) {
-            itemView.progress.visibility = if (isLoading) View.VISIBLE else View.GONE
-            if(retry){
-                itemView.retry.visibility = View.VISIBLE
-                itemView.errorTV.visibility = View.VISIBLE
-                itemView.errorTV.text = retryMsg
-            }else{
-
-                itemView.retry.visibility = View.GONE
-                itemView.errorTV.visibility = View.GONE
-            }
+    inner class LoadingVH(private val binding: ItemLoaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(isLoading: Boolean, retry: Boolean) {
+            binding.isLoadingBool = isLoading
+            binding.retryBool = retry
+            itemView.errorTV.text = retryMsg
             itemView.retry.setOnClickListener {
                 retryLive.postValue(true)
             }
         }
     }
 
-
-    inner class DeliveryVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DeliveryVH(private val binding: ItemDeliveryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(delivery: DeliveryEntity?) {
             delivery?.let {
-                itemView.fromTV.text = delivery.routeEntity.start
-                itemView.toTV.text = delivery.routeEntity.end
-                if (delivery.isFav)
-                    itemView.favIcon.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            itemView.favIcon.context,
-                            R.drawable.ic_favorite_fill
-                        )
-                    )
-                else
-                    itemView.favIcon.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            itemView.favIcon.context,
-                            R.drawable.ic_favorite
-                        )
-                    )
-                itemView.amountTV.text = delivery.getTotalAmount()
+                binding.delivery = delivery
                 Glide.with(itemView.context)
                     .load(delivery.goodsPicture)
                     .placeholder(R.drawable.ic_photo_black_24dp)
                     .error(itemView.context.getDrawable(R.drawable.ic_photo_black_24dp))
                     .apply(RequestOptions().override(80, 80))
                     .into(itemView.imageView)
-
                 itemView.setOnClickListener {
                     listener.onDeliveryTapped(delivery)
                 }
@@ -158,18 +141,14 @@ class DeliveryAdapter(private val listener: DeliveryClickListener) :
         }
     }
 
-    override fun getItem(position: Int): DeliveryEntity? {
-        return super.getItem(position)
-    }
-
-    fun setLoading(loading: Boolean) {
+    fun showLoading(showLoader: Boolean) {
         this.endObservable = false
-        this.showLoader = loading
+        this.showLoader = showLoader
         this.retryObservable = false
         notifyDataSetChanged()
     }
 
-    fun showRetry(show:Boolean, msg:String){
+    fun showRetry(show: Boolean, msg: String) {
         this.retryMsg = msg
         this.endObservable = false
         this.showLoader = false
@@ -177,15 +156,14 @@ class DeliveryAdapter(private val listener: DeliveryClickListener) :
         notifyDataSetChanged()
     }
 
-    fun setIsLastItem(isLast: Boolean){
+    fun setIsLastItem(isLast: Boolean) {
         this.retryObservable = false
         this.showLoader = false
         this.endObservable = isLast
-        Log.e("Zz", "isLast $isLast")
         notifyDataSetChanged()
     }
 
-    private fun hasLoadingFooter(): Boolean {
+    private fun hasFooter(): Boolean {
         return super.getItemCount() != 0 && (showLoader || retryObservable || endObservable)
     }
 
