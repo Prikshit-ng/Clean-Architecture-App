@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:fillViewport="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cardPadding"
+            android:layout_marginTop="@dimen/marginLeftRightCard"
+            android:text="@string/route_details"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeTitle"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="@dimen/marginLeftRightCard"
+            android:layout_marginTop="@dimen/marginTopBottomCard"
+            android:layout_marginRight="@dimen/marginLeftRightCard"
+            android:layout_marginBottom="@dimen/marginTopBottomCard"
+            app:cardCornerRadius="@dimen/cardCornerRadius">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardPadding"
+                    android:layout_marginTop="@dimen/cardPadding"
+                    android:text="@string/from"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/cardPadding"
+                    android:text="@string/to"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/fromTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="@+id/textView2"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/toTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintStart_toStartOf="@+id/fromTV"
+                    app:layout_constraintTop_toTopOf="@+id/textView"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="SpUsage" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cardPadding"
+            android:layout_marginTop="@dimen/marginLeftRightCard"
+            android:text="@string/goods_to_deliver"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeTitle"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginLeftRightCard"
+            android:layout_marginTop="@dimen/marginTopBottomCard"
+            android:layout_marginRight="@dimen/marginLeftRightCard"
+            android:layout_marginBottom="@dimen/marginTopBottomCard"
+            app:cardCornerRadius="@dimen/cardCornerRadius">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/goodsIV"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_photo_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/remarksTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginLeftRightCard"
+                    android:layout_marginEnd="@dimen/cardPadding"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeMedium"
+                    app:layout_constraintBottom_toBottomOf="@+id/goodsIV"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/goodsIV"
+                    app:layout_constraintTop_toTopOf="@+id/goodsIV"
+                    tools:ignore="SpUsage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cardPadding"
+            android:layout_marginTop="@dimen/marginLeftRightCard"
+            android:text="@string/senders_information"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeTitle"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginLeftRightCard"
+            android:layout_marginTop="@dimen/marginTopBottomCard"
+            android:layout_marginRight="@dimen/marginLeftRightCard"
+            android:layout_marginBottom="@dimen/marginTopBottomCard"
+            app:cardCornerRadius="@dimen/cardCornerRadius">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardPadding"
+                    android:layout_marginTop="@dimen/cardPadding"
+                    android:text="@string/name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/sendersName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/sendersName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginLeftRightCard"
+                    android:layout_marginTop="@dimen/cardPadding"
+                    android:layout_marginBottom="@dimen/cardPadding"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardPadding"
+                    android:layout_marginTop="@dimen/marginLeftRightCard"
+                    android:text="@string/email"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/sendersEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginLeftRightCard"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/textView4"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardPadding"
+                    android:layout_marginTop="@dimen/marginLeftRightCard"
+                    android:layout_marginBottom="@dimen/cardPadding"
+                    android:text="@string/phone"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/sendersPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginLeftRightCard"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/textView5"
+                    tools:ignore="SpUsage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cardPadding"
+            android:layout_marginTop="@dimen/marginLeftRightCard"
+            android:text="@string/delivery_charges"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeTitle"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginLeftRightCard"
+            android:layout_marginTop="@dimen/marginTopBottomCard"
+            android:layout_marginRight="@dimen/marginLeftRightCard"
+            android:layout_marginBottom="@dimen/marginTopBottomCard"
+            app:cardCornerRadius="@dimen/cardCornerRadius">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/feeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardPadding"
+                    android:layout_marginTop="@dimen/cardPadding"
+                    android:text="@string/delivery_fee"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/deliveryFeeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="@+id/feeTV"
+                    app:layout_constraintStart_toStartOf="@+id/surchargeFeeTV"
+                    app:layout_constraintTop_toTopOf="@+id/feeTV"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/surchargeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardPadding"
+                    android:layout_marginTop="@dimen/marginLeftRightCard"
+                    android:text="@string/surcharge"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/feeTV"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/surchargeFeeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="@+id/surchargeTV"
+                    app:layout_constraintStart_toStartOf="@+id/totalFeeTV"
+                    app:layout_constraintTop_toTopOf="@+id/surchargeTV"
+                    tools:ignore="SpUsage" />
+
+
+                <TextView
+                    android:id="@+id/chargeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cardPadding"
+                    android:layout_marginTop="@dimen/marginLeftRightCard"
+                    android:layout_marginBottom="@dimen/cardPadding"
+                    android:text="@string/total_charges"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/surchargeTV"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/totalFeeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginLeftRightCard"
+                    android:text="@string/na"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSizeNormal"
+                    app:layout_constraintBottom_toBottomOf="@+id/chargeTV"
+                    app:layout_constraintStart_toEndOf="@+id/chargeTV"
+                    app:layout_constraintTop_toTopOf="@+id/chargeTV"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="SpUsage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/favButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/marginTopBottomCard"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/colorAccent"
+            android:padding="@dimen/marginTopBottomCard"
+            android:text="@string/add_to_favourite"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_favorite"
+            app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+    </LinearLayout>
+</ScrollView>
