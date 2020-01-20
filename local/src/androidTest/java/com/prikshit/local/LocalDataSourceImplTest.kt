@@ -21,7 +21,7 @@ class LocalDataSourceImplTest {
 
     private lateinit var deliveryDao: DeliveryDao
 
-    lateinit var deliveryDB: DeliveryDB
+    private lateinit var deliveryDB: DeliveryDB
     private lateinit var localDataSource: LocalDataSource
 
     @Before
@@ -57,7 +57,7 @@ class LocalDataSourceImplTest {
 
     @Test
     fun updateDelivery() {
-        var deliveryLocal = TestDataGenerator.generateDeliveryList()[0]
+        val deliveryLocal = TestDataGenerator.generateDeliveryList()[0]
         deliveryLocal.isFav = true
         deliveryDao.updateDelivery(deliveryLocal).test().assertComplete()
     }

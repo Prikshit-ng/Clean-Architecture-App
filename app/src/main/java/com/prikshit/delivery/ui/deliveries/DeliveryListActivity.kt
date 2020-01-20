@@ -76,7 +76,7 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryAdapter.DeliveryClickL
                         retryBtn.visibility = View.VISIBLE
                     }
                     deliveryListAdapter.setLoading(false)
-                    var err = getString(
+                    val err = getString(
                         if (it == Status.NETWORK_ERROR) R.string.network_error
                         else R.string.error_message
                     )

@@ -10,8 +10,6 @@
     <string name="network_error">Make sure you are connected to internet</string>
     <string name="error_message">Something went wrong</string>
     <string name="complete">All deliveries fetched</string>
-    <string name="success">Success</string>
-    <string name="error">Error</string>
     <string name="senders_information">Senders Information</string>
     <string name="na">NA</string>
     <string name="name">Name:</string>
@@ -24,4 +22,5 @@
     <string name="total_charges">Total Charges:</string>
     <string name="retry">Retry</string>
     <string name="end">End</string>
+    <string name="delivery_item">Delivery Item</string>
 </resources>

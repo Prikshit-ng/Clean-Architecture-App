@@ -23,7 +23,7 @@ class DeliveryViewmodel @Inject constructor(
         DeliveryBoundaryCallback(deliveryListTask, networkUtil)
 
     init {
-        var config = PagedList.Config.Builder()
+        val config = PagedList.Config.Builder()
             .setInitialLoadSizeHint(Constants.PAGE_SIZE)
             .setPageSize(Constants.PAGE_SIZE)
             .setEnablePlaceholders(true).build()

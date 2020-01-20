@@ -23,9 +23,7 @@ open class ViewModelFactory @Inject constructor(
             }
         }
 
-        if (provider == null) {
-            throw IllegalStateException("Unknown View Model $modelClass")
-        }
+        checkNotNull(provider) { "Unknown View Model $modelClass" }
 
         return try {
             provider.get() as T

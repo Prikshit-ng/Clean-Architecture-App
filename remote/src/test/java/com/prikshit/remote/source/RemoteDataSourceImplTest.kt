@@ -3,18 +3,15 @@ package com.prikshit.remote.source
 import com.prikshit.data.repository.RemoteDatasource
 import com.prikshit.remote.api.DeliveryService
 import com.prikshit.remote.mapper.DeliveryNetworkMapper
-import com.prikshit.remote.model.DeliveryNetwork
 import com.prikshit.remote.source.utils.TestDataGenerator
 import io.reactivex.Observable
-import org.junit.Test
-
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import retrofit2.Response
 
 @RunWith(JUnit4::class)
 class RemoteDataSourceImplTest {

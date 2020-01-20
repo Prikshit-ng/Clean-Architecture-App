@@ -47,12 +47,12 @@ class DeliveryDetailActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        var deliveryDetail = deliveryDetailVM.detDeliveryById(intent.getStringExtra("dId") ?: "")
+        val deliveryDetail = deliveryDetailVM.detDeliveryById(intent.getStringExtra("dId") ?: "")
         deliveryDetail.observe(this,
             Observer {
                 setUiData(it)
                 favButton.setOnClickListener { _ ->
-                    var deliveryData = it
+                    val deliveryData = it
                     deliveryData.isFav = !it.isFav
                     disposables.add(
                         deliveryDetailVM.updateDelivery(deliveryData)

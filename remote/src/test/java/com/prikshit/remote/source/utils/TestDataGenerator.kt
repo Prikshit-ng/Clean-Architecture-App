@@ -7,7 +7,7 @@ import com.prikshit.remote.model.SenderNetwork
 
 object TestDataGenerator {
     fun generateDeliveryList(): List<DeliveryNetwork> {
-        var d1 = DeliveryNetwork(
+        val d1 = DeliveryNetwork(
             "1", "$2.20",
             "https://loremflickr.com/320/240/cat?lock=9953",
             "2014-10-06T10:45:38-08:00",
@@ -16,7 +16,7 @@ object TestDataGenerator {
             SenderNetwork("hardingwelch@comdom.com", "Harding Welch", "+1 (899) 523-3905"),
             "$1.23"
         )
-        var d2 = DeliveryNetwork(
+        val d2 = DeliveryNetwork(
             "3", "$12.20",
             "https://loremflickr.com/320/240/cat?lock=9953",
             "2014-11-06T10:45:38-08:00",
@@ -25,7 +25,7 @@ object TestDataGenerator {
             SenderNetwork("hardingwelch@comdom.com", "Harding Welch", "+1 (899) 523-3905"),
             "$3.23"
         )
-        var d3 = DeliveryNetwork(
+        val d3 = DeliveryNetwork(
             "sdfvdf343", "$42.20",
             "https://loremflickr.com/320/240/cat?lock=9953",
             "2015-11-06T10:45:38-08:00",

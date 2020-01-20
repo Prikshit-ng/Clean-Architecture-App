@@ -21,7 +21,7 @@ class DeliveryBoundaryCallback @Inject constructor(
     private var totalCount: Int = 0
     private var isLoaded: Boolean = false
     var status: MutableLiveData<Status> = MutableLiveData()
-    var disposable = CompositeDisposable()
+    private var disposable = CompositeDisposable()
 
 
     override fun onZeroItemsLoaded() {
@@ -111,7 +111,7 @@ class DeliveryBoundaryCallback @Inject constructor(
         }
     }
 
-    fun updateState(state: Status) {
+    private fun updateState(state: Status) {
         this.status.postValue(state)
     }
 
