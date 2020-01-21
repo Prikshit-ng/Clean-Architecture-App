@@ -108,7 +108,7 @@ class DeliveryDetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        finish()
+        onBackPressed()
         return false
     }
 
