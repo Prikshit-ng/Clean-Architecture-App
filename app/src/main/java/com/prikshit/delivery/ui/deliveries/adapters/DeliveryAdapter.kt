@@ -3,6 +3,7 @@ package com.prikshit.delivery.ui.deliveries.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedListAdapter
@@ -127,6 +128,11 @@ class DeliveryAdapter(private val listener: DeliveryClickListener) :
 
         fun bind(delivery: DeliveryEntity?) {
             delivery?.let {
+                ViewCompat.setTransitionName(itemView.imageView, it.id)
+                ViewCompat.setTransitionName(itemView.fromTV, it.id + "from")
+                ViewCompat.setTransitionName(itemView.toTV, it.id + "to")
+                ViewCompat.setTransitionName(itemView.textView2, it.id + "from1")
+                ViewCompat.setTransitionName(itemView.textView, it.id + "to1")
                 binding.delivery = delivery
                 Glide.with(itemView.context)
                     .load(delivery.goodsPicture)
@@ -135,7 +141,17 @@ class DeliveryAdapter(private val listener: DeliveryClickListener) :
                     .apply(RequestOptions().override(80, 80))
                     .into(itemView.imageView)
                 itemView.setOnClickListener {
-                    listener.onDeliveryTapped(delivery)
+                    listener.onDeliveryTapped(
+                        delivery,
+                        arrayOf(
+                            itemView.imageView,
+                            itemView.fromTV,
+                            itemView.toTV,
+                            itemView.textView2,
+                            itemView.textView
+                        ),
+                        adapterPosition
+                    )
                 }
             }
         }
@@ -168,6 +184,10 @@ class DeliveryAdapter(private val listener: DeliveryClickListener) :
     }
 
     interface DeliveryClickListener {
-        fun onDeliveryTapped(delivery: DeliveryEntity)
+        fun onDeliveryTapped(
+            delivery: DeliveryEntity,
+            arrOfViews: Array<View>,
+            adapterPosition: Int
+        )
     }
 }

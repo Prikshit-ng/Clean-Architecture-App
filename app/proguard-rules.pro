@@ -21,3 +21,24 @@
 #-renamesourcefileattribute SourceFile
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep class com.bumptech.glide.GeneratedAppGlideModuleImpl
+
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn javax.annotation.**
+-dontwarn kotlin.Unit
+-dontwarn org.junit.**
+-dontwarn org.mockito.**
+-dontwarn org.conscrypt.**
+-dontwarn java.lang.instrument.**
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions$*
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
+-keep class com.prikshit.data.model.** { *; }
+-keep class com.prikshit.domain.entities.** { *; }
+-keep class com.prikshit.local.model.** { *; }
+-keep class com.prikshit.remote.model.** { *; }

@@ -1,5 +1,6 @@
 package com.prikshit.delivery.ui.deliveryDetail
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.prikshit.delivery.R
 import com.prikshit.delivery.databinding.ActivityDeliveryDetailBinding
 import com.prikshit.delivery.ui.deliveryDetail.viewmodel.DeliveryDetailViewmodel
@@ -41,10 +46,19 @@ class DeliveryDetailActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        initTransitions()
         initToolbar()
         deliveryDetailVM = ViewModelProviders.of(this, viewModelFactory)
             .get(DeliveryDetailViewmodel::class.java)
         updateUI()
+    }
+
+    private fun initTransitions() {
+        goodsIV.transitionName = intent.extras?.getString("TRANSITION_IMAGE")
+        fromTV.transitionName = intent.extras?.getString("TRANSITION_FROM")
+        toTV.transitionName = intent.extras?.getString("TRANSITION_TO")
+        textView2.transitionName = intent.extras?.getString("TRANSITION_FROM1")
+        textView.transitionName = intent.extras?.getString("TRANSITION_TO1")
     }
 
     private fun initToolbar() {
@@ -70,6 +84,26 @@ class DeliveryDetailActivity : AppCompatActivity() {
             .load(it.goodsPicture)
             .error(getDrawable(R.drawable.ic_photo_black_24dp))
             .apply(RequestOptions().override(100, 100))
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?, model: Any?, target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    supportStartPostponedEnterTransition()
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    supportStartPostponedEnterTransition()
+                    return false
+                }
+            })
             .into(goodsIV)
     }
 
