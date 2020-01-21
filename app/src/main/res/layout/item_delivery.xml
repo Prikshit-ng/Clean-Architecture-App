@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="RtlSymmetry">
+    xmlns:tools="http://schemas.android.com/tools">
 <data>
     <variable
         name="delivery"
@@ -14,6 +13,7 @@
         android:layout_marginTop="@dimen/marginTopBottomCard"
         android:layout_marginBottom="@dimen/marginTopBottomCard"
         app:cardCornerRadius="@dimen/cardCornerRadius"
+        android:paddingStart="@dimen/no_space"
         android:paddingEnd="@dimen/marginLeftRightCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -58,8 +58,10 @@ class DeliveryListActivity : AppCompatActivity(), DeliveryAdapter.DeliveryClickL
             deliveryVM.refreshList()
         }
         deliveryVM.deliveryListSource.observe(this, Observer {
-            deliveryListAdapter.submitList(it)
-            deliveryListAdapter.notifyDataSetChanged()
+            if(it.size!=0) {
+                deliveryListAdapter.submitList(it)
+                deliveryListAdapter.notifyDataSetChanged()
+            }
             hideRefresher()
         })
     }

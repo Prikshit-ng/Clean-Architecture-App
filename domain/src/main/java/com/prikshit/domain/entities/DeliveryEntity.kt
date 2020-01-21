@@ -1,5 +1,7 @@
 package com.prikshit.domain.entities
 
+import java.math.BigDecimal
+
 data class DeliveryEntity(
     val id: String,
     val deliveryFee: String,
@@ -12,10 +14,10 @@ data class DeliveryEntity(
     var isFav: Boolean
 ) {
     fun getTotalAmount(): String {
-        val dFee = deliveryFee.substring(1).toDouble()
-        val dCharge = surcharge.substring(1).toDouble()
-        val total = (dFee + dCharge)
+        val dFee = deliveryFee.substring(1).toBigDecimal()
+        val dCharge = surcharge.substring(1).toBigDecimal()
+        val total = dFee.add(dCharge)
 
-        return deliveryFee.toCharArray()[0] + "%.2f".format(total)
+        return deliveryFee.toCharArray()[0].toString() +total.setScale(2, BigDecimal.ROUND_HALF_EVEN)
     }
 }

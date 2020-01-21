@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">我的应用程序</string>
+    <string name="add_to_favourite">加入收藏</string>
+    <string name="complete">已提取所有交货</string>
+    <string name="delivery_charges">送货费</string>
+    <string name="delivery_fee">送货费：</string>
+    <string name="delivery_item">交货项目</string>
+    <string name="email">电子邮件：</string>
+    <string name="end">结束</string>
+    <string name="error_message">有些不对劲</string>
+    <string name="from">从：</string>
+    <string name="goods_to_deliver">交付货物</string>
+    <string name="name">名称：</string>
+    <string name="network_error">确保您已连接到互联网</string>
+    <string name="phone">电话</string>
+    <string name="remove_from_favourite">从收藏夹中删除</string>
+    <string name="retry">重试</string>
+    <string name="route_details">路线详情</string>
+    <string name="senders_information">发件人信息</string>
+    <string name="surcharge">附加费：</string>
+    <string name="title_activity_delivery_detail">交货细节</string>
+    <string name="title_deliveries">我的送货</string>
+    <string name="to">至：</string>
+    <string name="total_charges">总收费：</string>
+</resources>
