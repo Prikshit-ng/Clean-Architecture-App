@@ -1,8 +1,8 @@
 package com.prikshit.delivery.di
 
-import com.prikshit.delivery.utils.Constants
 import com.prikshit.data.model.DeliveryData
 import com.prikshit.data.repository.RemoteDatasource
+import com.prikshit.delivery.BuildConfig
 import com.prikshit.remote.api.DeliveryService
 import com.prikshit.remote.mapper.DeliveryNetworkMapper
 import com.prikshit.remote.mapper.Mapper
@@ -50,7 +50,7 @@ class RemoteModule {
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Constants.API_URL)
+            .baseUrl(BuildConfig.SERVER_URL)
             .build()
     }
 }

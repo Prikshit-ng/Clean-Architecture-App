@@ -3,7 +3,7 @@ package com.prikshit.delivery.ui.deliveries.paging
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
-import com.prikshit.delivery.utils.Constants
+import com.prikshit.delivery.BuildConfig
 import com.prikshit.delivery.utils.NetworkUtil
 import com.prikshit.domain.entities.DeliveryEntity
 import com.prikshit.domain.usecases.GetDeliveryListTask
@@ -57,7 +57,7 @@ class DeliveryBoundaryCallback @Inject constructor(
                 .buildUseCase(
                     GetDeliveryListTask.Params(
                         startIndex = offset.toString(),
-                        limit = Constants.PAGE_SIZE
+                        limit = BuildConfig.PAGE_SIZE
                     )
                 )
                 .map { Resource.success(it) }
@@ -90,7 +90,7 @@ class DeliveryBoundaryCallback @Inject constructor(
             Log.e("PK", "list == null")
         } else {
             totalCount += list.size
-            if (list.size < Constants.PAGE_SIZE) {
+            if (list.size < BuildConfig.PAGE_SIZE) {
                 isLoaded = true
                 updateState(Status.LOADED)
             } else {

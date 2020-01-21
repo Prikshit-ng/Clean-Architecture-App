@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.prikshit.delivery.BuildConfig
 import com.prikshit.delivery.ui.deliveries.paging.DeliveryBoundaryCallback
-import com.prikshit.delivery.utils.Constants
 import com.prikshit.delivery.utils.NetworkUtil
 import com.prikshit.domain.entities.DeliveryEntity
 import com.prikshit.domain.usecases.GetDeliveryFromCacheTask
@@ -24,11 +24,11 @@ class DeliveryViewmodel @Inject constructor(
 
     init {
         val config = PagedList.Config.Builder()
-            .setInitialLoadSizeHint(Constants.PAGE_SIZE)
-            .setPageSize(Constants.PAGE_SIZE)
+            .setInitialLoadSizeHint(BuildConfig.PAGE_SIZE)
+            .setPageSize(BuildConfig.PAGE_SIZE)
             .setEnablePlaceholders(true).build()
         deliveryListSource = LivePagedListBuilder(
-            getDeliveryFromCacheTask.generateDataList(Constants.PAGE_SIZE), config
+            getDeliveryFromCacheTask.generateDataList(BuildConfig.PAGE_SIZE), config
         )
             .setBoundaryCallback(boundaryCallback).build()
     }

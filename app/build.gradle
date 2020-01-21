@@ -10,7 +10,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.nagarro.app"
+        applicationId "com.prikshit.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.appVersionCode
@@ -21,6 +21,8 @@ android {
                 includeCompileClasspath true
             }
         }
+        buildConfigField("String", "SERVER_URL", "\"https://mock-api-mobile.dev.lalamove.com/\"")
+        buildConfigField("Integer", "PAGE_SIZE", "20")
     }
     dataBinding {
         enabled = true
